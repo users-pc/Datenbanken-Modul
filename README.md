@@ -6,26 +6,26 @@ Konzeption der Datenvisualisierung:
     - Intressante Fragen: 
         - In welcher Region gibt es die meisten Hochschulen? 
         - Wie hoch ist die Bevölkerungsdichte in den Regionen mit den meisten Hochschulen?
-        -Gibt es einen Zusammenhang zwischen der Anzahl der Hochschulen und der Bevölkerungsdichte
-    Projekt-Idee: 
-    Unser Ziel:
-        Mit dieser Website möchten wir die zuvor gestellten Fragen umfassend beantworten. Um dies zu erreichen, entwickeln wir eine interaktive Visualisierung, die nicht nur Antworten liefert, sondern auch Zusammenhänge verdeutlicht und dem Benutzer mehrere Betrachtungsweisen ermöglicht.
-        Die Website soll intuitiv bedienbar sein und dem Nutzer die Kontrolle über die Darstellung der Daten geben. Durch die Möglichkeit, Filter zu setzen und verschiedene Visualisierungen auszuwählen, kann jeder Benutzer die Informationen auf seine individuellen Bedürfnisse zuschneiden.
-        Unsere Website dient nicht nur der Informationsbereitstellung, sondern als umfassendes Werkzeug zur Datenerkundung. Durch die interaktive Visualisierung und die Möglichkeit zur individuellen Analyse, ermöglicht sie es jedem Nutzer, die komplexen Zusammenhänge zwischen Hochschulen und Bevölkerungsentwicklung zu verstehen.
-    Voraussetzungen:
-        -PostgreSQL (Datenbank)
-        -Django (Webframework für Python)
-        -Folium (Kartenvisualisierung)
-        -Nominatim (Datenbank von Openstreetmap auf PostgreSQL mit Koordinaten für jede Adresse)
-        -Plotly (Ermöglicht Diagramme in Python -> Datenvisualisierung)
-        -Bootstrap Vorlage von shuffle.dev
-    Schritte: 
-        1. Wir setzen Django auf 
-        2. Wir setzen PostgreSQL auf 
-        3. Wir erstellen die Tabellen über ein ORM von Django (Embedded SQL)
-        4. Impotieren der Datein hochschulen.csv und bevölkerung.csv  
-        5. Geocodierung (Geocoding): Adressen, werden in Koordinaten umgewandelt mithilfe von Nominatim und in der Datenbank gespeichert
-        6. Views Funktionen schreiben und Website per Javascript, Html, CSS fertigstellen mithilfe von Bootstrap
+        -Gibt es einen Zusammenhang zwischen der Anzahl der Hochschulen und der Bevölkerungsdichte?
+        
+Projekt-Idee: 
+    Mit dieser Website möchten wir die zuvor gestellten Fragen umfassend beantworten. Um dies zu erreichen, entwickeln wir eine interaktive Visualisierung, die nicht nur Antworten liefert, sondern auch Zusammenhänge verdeutlicht und dem Benutzer mehrere Betrachtungsweisen ermöglicht.
+    Die Website soll intuitiv bedienbar sein und dem Nutzer die Kontrolle über die Darstellung der Daten geben. Durch die Möglichkeit, Filter zu setzen und verschiedene Visualisierungen auszuwählen, kann jeder Benutzer die Informationen auf seine individuellen Bedürfnisse zuschneiden.
+    Unsere Website dient nicht nur der Informationsbereitstellung, sondern als umfassendes Werkzeug zur Datenerkundung. Durch die interaktive Visualisierung und die Möglichkeit zur individuellen Analyse, ermöglicht sie es jedem Nutzer, die komplexen Zusammenhänge zwischen Hochschulen und Bevölkerungsentwicklung zu verstehen.
+Voraussetzungen:
+    -PostgreSQL (Datenbank)
+    -Django (Webframework für Python)
+    -Folium (Kartenvisualisierung)
+    -Nominatim (Datenbank von Openstreetmap auf PostgreSQL mit Koordinaten für jede Adresse)
+    -Plotly (Ermöglicht Diagramme in Python -> Datenvisualisierung)
+    -Bootstrap Vorlage von shuffle.dev
+Schritte: 
+    1. Wir setzen Django auf 
+    2. Wir setzen PostgreSQL auf 
+    3. Wir erstellen die Tabellen über ein ORM von Django (Embedded SQL)
+    4. Impotieren der Datein hochschulen.csv und bevölkerung.csv  
+    5. Geocodierung (Geocoding): Adressen, werden in Koordinaten umgewandelt mithilfe von Nominatim und in der Datenbank gespeichert
+    6. Views Funktionen schreiben und Website per Javascript, Html, CSS fertigstellen mithilfe von Bootstrap
 
 Aufgabe 2)
 
@@ -34,20 +34,20 @@ Wir unterteilen für jede Visualisierung die Wichtigkeit der Daten jeweils ander
 
 Karten: 
     
-    Darstellung -> hochschule.csv   
-        - Adresse (Straße, Postleitzahl, Ort)
-        - Namen
-        - Bundesland (Für Filter)
-        - Anzahl Studierende
-        - Koordinaten (Nominatim)
-        Optional: Website 
-    
-    Heatmap -> bevölkerung.csv 
-        - Anzahl
-        - Insgesamt
-        - männlich (Filter)
-        - weiblich (Filter)
-        - Koordinaten vom Bundesland (Nominatim)
+Darstellung -> hochschule.csv   
+    - Adresse (Straße, Postleitzahl, Ort)
+    - Namen
+    - Bundesland (Für Filter)
+    - Anzahl Studierende
+    - Koordinaten (Nominatim)
+    Optional: Website 
+
+Heatmap -> bevölkerung.csv 
+    - Anzahl
+    - Insgesamt
+    - männlich (Filter)
+    - weiblich (Filter)
+    - Koordinaten vom Bundesland (Nominatim)
 
 Diagramm 1 (Streudiagramm: Ein Streudiagramm, das die Anzahl der Studierenden an einer Hochschule in Abhängigkeit von der Bevölkerungsdichte in der Region darstellt.): 
     - Anzahl der Studierenden 
