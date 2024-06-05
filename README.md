@@ -52,6 +52,8 @@ Unsere interaktive Visualisierungswebsite soll nicht nur Antworten liefern, sond
 
 ## Aufgabe 3: Datenzugriff
 Die Daten können auf der Website unter [Link zur Website] eingesehen werden.
+![image](https://github.com/users-pc/Datenbanken-Modul/assets/60401089/c6d7a17e-8558-4fe0-8cea-7d48d5c29ac2)
+
 
 ## Aufgabe 4: Weitere Schritte
 [Hier weitere Schritte einfügen]
