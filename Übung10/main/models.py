@@ -24,15 +24,15 @@ class Hochschulen(models.Model):
     
 
 class Bevölkerung(models.Model):
-    ort = models.CharField(max_length=50)
+    ort = models.CharField(max_length=250)
     longitude = models.FloatField(default=0.0)
     latitude = models.FloatField(default=0.0)
-    name= models.CharField(max_length=50)
+    dg = models.IntegerField(null=True)
     total_population = models.IntegerField(null=True)
     male_population = models.IntegerField(null=True)
     female_population = models.IntegerField(null=True)
     
     def __str__(self):
-        return self.ort + " (" + self.total_population + ")"
+        return self.ort
 
 
