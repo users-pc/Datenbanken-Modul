@@ -9,6 +9,9 @@ from django.contrib.postgres.search import SearchVector, SearchQuery
 # Create your views here.
 def home(request):
     # einfügen der csv
+    return render(request, 'index.html')
+
+def hochschulen(request):
     """
     with open('/home/users-pc/Studium/Datenbanksysteme/csv-files/hochschulen.csv', 'r') as file:
         reader = csv.reader(file, delimiter=';')  # Setzen des Delimiters auf ';'
@@ -64,12 +67,6 @@ def home(request):
                         homepage = row[12]
                     )
         """
-    
-
-
-    return render(request, 'index.html')
-
-def hochschulen(request):
     hochschulen = Hochschulen.objects.all().order_by('id')
     # Full Text SEarch 
     query = request.GET.get('q')
@@ -147,3 +144,12 @@ def bevölkerung(request):
     page_obj = paginator.get_page(page_number)
     context = {'bevölkerung': page_obj, 'title': 'Bevölkerung'}
     return render(request, 'bevölkerung.html', context)
+
+
+def visual(request):
+    context = {}
+    return render(request, 'visual.html', context)
+
+
+def karten(request):
+    return render(request, 'karten.html')
