@@ -15,6 +15,22 @@
     {% include 'basics/nav.html' %}  
         <!-- Visual section  -->
         <!-- Diagramme -->
+         <h3>Unis im Verhältnis zu Fachhochschulen</h3>
+         <div style="height: 300px;">
+            {{uni_vs_fachhochschule|safe}}
+         </div>
+         <h3> Staatlich- vs Private Hochschulen</h3>
+         <div style="height: 300px;">
+            {{hopenclosed|safe}}
+         </div>
+
+        <h3> Anzahl der Studierenden</h3> 
+        <div style="height: 300px;">
+            {{studis_an_uni_vs_fachhochschule|safe}}
+        </div>
+        <div style="height: 400px;">
+            {{studis_bundesland|safe}}
+        </div>
 
 
         <!-- Visual section ende -->

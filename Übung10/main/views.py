@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .views_helper import coordinates 
+from .views_helper import coordinates, hopenclosed, uni_vs_fachhochschule,  studis_an_uni_vs_fachhochschule, studis_bundesland
 import csv
 from .models import Hochschulen, Bevölkerung
 from django.core.paginator import Paginator
@@ -147,7 +147,13 @@ def bevölkerung(request):
 
 
 def visual(request):
-    context = {}
+    hochschulen = Hochschulen.objects.all()
+    bevölkerung = Bevölkerung.objects.all()
+    hopenclosed_plotly=hopenclosed(hochschulen)
+    uni_vs_fachhochschule_plotly=uni_vs_fachhochschule(hochschulen)
+    studis_an_uni_vs_fachhochschule_plotly=studis_an_uni_vs_fachhochschule(hochschulen)
+    studis_bundesland_plotly=studis_bundesland(hochschulen)
+    context = {'hopenclosed': hopenclosed_plotly,'uni_vs_fachhochschule': uni_vs_fachhochschule_plotly, 'studis_an_uni_vs_fachhochschule': studis_an_uni_vs_fachhochschule_plotly,'title': 'Visualisierung', 'studis_bundesland': studis_bundesland_plotly}
     return render(request, 'visual.html', context)
 
 

@@ -84,3 +84,92 @@ filtered_ads = filter_ads(ads, lat, lon, radius)
 for ad in filtered_ads:
     print(ad)
 """
+
+import plotly.graph_objects as go
+import plotly.offline as opy
+import pandas as p
+
+# Anzahl der Hochschulen im Vergleich von Privat und Öffentlich
+def hopenclosed(objects):
+    hochschulen = objects
+    private = []
+    öffentlich = []
+    for hochschule in hochschulen:
+        if hochschule.trägerschaft == 'privat, staatlich anerkannt':
+            private.append(hochschule)
+        else:
+            öffentlich.append(hochschule)
+    labels = ['Privat', 'Öffentlich']
+    values = [len(private), len(öffentlich)]
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    plot = opy.plot(fig, auto_open=False, output_type='div')
+    return plot
+
+# Anzahl der Hochschulen im Vergleich von Universitäten und Fachhochschulen
+def uni_vs_fachhochschule(objects):
+    hochschulen = objects
+    universitäten = []
+    fachhochschulen = []
+    verwaltungshochschulen = []
+    kunsthochschulen = []
+    for hochschule in hochschulen:
+        if hochschule.typ == 'Universitäten':
+            universitäten.append(hochschule)
+        elif hochschule.typ == 'Verwaltungshochschule':
+            verwaltungshochschulen.append(hochschule)
+        elif hochschule.typ == 'Künstlerische Hochschulen':
+            kunsthochschulen.append(hochschule)
+        else:
+            fachhochschulen.append(hochschule)
+    labels = ['Universitäten', 'Fachhochschulen', 'Verwaltungshochschulen', 'Kunsthochschulen']
+    values = [len(universitäten), len(fachhochschulen), len(verwaltungshochschulen), len(kunsthochschulen)]
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    plot = opy.plot(fig, auto_open=False, output_type='div')
+    return plot
+
+
+# Anzahl der Studenten an Hochschulen im Vergleich zu Universitäten und Fachhochschulen
+def studis_an_uni_vs_fachhochschule(objects):
+    hochschulen = objects
+    universitäten = []
+    fachhochschulen = []
+    for hochschule in hochschulen:
+        if hochschule.typ == 'Universitäten':
+            universitäten.append(hochschule)
+        else:
+            fachhochschulen.append(hochschule)
+    studis_universitäten = 0
+    studis_fachhochschulen = 0
+    for uni in universitäten:
+        try:
+            studis_universitäten += uni.anz_studis
+        except:
+            pass
+    for fh in fachhochschulen:
+        try:
+            studis_fachhochschulen += fh.anz_studis
+        except:
+            pass
+    print(studis_universitäten, studis_fachhochschulen)
+    labels = ['Universitäten', 'Fachhochschulen']
+    values = [studis_universitäten, studis_fachhochschulen]
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    plot = opy.plot(fig, auto_open=False, output_type='div')
+    return plot
+
+# Ergebnis: PLotly über die Anzahl der Studenten nach Bundesland in einem Balkendiagramm
+def studis_bundesland(objects):
+    hochschulen = objects
+    bundesland = []
+    studis = []
+    for hochschule in hochschulen:
+        if hochschule.bundesland not in bundesland:
+            bundesland.append(hochschule.bundesland)
+            studis.append(0)
+        try:
+            studis[bundesland.index(hochschule.bundesland)] += hochschule.anz_studis
+        except:
+            pass
+    fig = go.Figure(data=[go.Bar(x=bundesland, y=studis)])
+    plot = opy.plot(fig, auto_open=False, output_type='div')
+    return plot
