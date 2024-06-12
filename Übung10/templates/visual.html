@@ -15,23 +15,37 @@
     {% include 'basics/nav.html' %}  
         <!-- Visual section  -->
         <!-- Diagramme -->
-         <h3>Unis im Verhältnis zu Fachhochschulen</h3>
-         <div style="height: 300px;">
-            {{uni_vs_fachhochschule|safe}}
-         </div>
-         <h3> Staatlich- vs Private Hochschulen</h3>
-         <div style="height: 300px;">
-            {{hopenclosed|safe}}
-         </div>
-
-        <h3> Anzahl der Studierenden</h3> 
-        <div style="height: 300px;">
-            {{studis_an_uni_vs_fachhochschule|safe}}
+        <br>
+        <div class="card text-center">
+            <div class="card-header">
+              Karte 2
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Hochschulen Diagramme</h5>
+              <p class="card-text">Diese Karte zeigt alle Hochschulen auf einer Dynamischen Karte mit verweis auf die Homepage.</p>
+              <a href="{% url 'hochschulenvisual' %}" class="btn btn-primary">Anschauen</a>
+            </div>
         </div>
-        <div style="height: 400px;">
-            {{studis_bundesland|safe}}
+        <div class="card text-center">
+            <div class="card-header">
+              Karte 3
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Bevölkerungs-Diagramme</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Anschauen</a>
+            </div>
         </div>
-
+        <div class="card text-center">
+            <div class="card-header">
+              Karte 3
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Relationen zwischen Hochschulen und der Bevölkerung</h5>
+              <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+              <a href="#" class="btn btn-primary">Anschauen</a>
+            </div>
+        </div>
 
         <!-- Visual section ende -->
     {% include 'basics/footer.html' %}
