@@ -11,5 +11,5 @@ urlpatterns = [
     # ------------ Karte ------------------
     path('karten', views.karten, name="karten"),
     path('hochschulkarte', views.hochschulenmap, name="hochschulkarte"),
-    path('bevölerungkarte', views.bevölkerungsheatmap, name="bevölkerungskarte"),
+    path('bevölerungkarte', views.bevölkerungsmap, name="bevölkerungskarte"),
 ]

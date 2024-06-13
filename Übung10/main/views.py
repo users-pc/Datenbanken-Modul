@@ -6,6 +6,8 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.contrib.postgres.search import SearchVector, SearchQuery
 import folium 
+import pandas as pd
+
 from folium.plugins import MarkerCluster
 # Create your views here.
 def home(request):
@@ -185,51 +187,22 @@ def hochschulenmap(request):
     context = {'map': m._repr_html_(), 'title': 'Karte'}
     return render(request, 'hochschulenmap.html', context)
 
-import pandas as pd
-import requests
-import json
 
-def bevölkerungsheatmap(request):
+def bevölkerungsmap(request):
     # Mache eine choropleth map mit der Bevölkerungsdichte in Deutschland mit Folium 
     # Die Daten für die Bevölkerungsdichte sind in der Bevölkerungstabelle gespeichert
-    geo_data='https://raw.githubusercontent.com/isellsoap/deutschlandGeoJSON/master/2_bundeslaender/4_niedrig.geo.json',
     # geojson importieren und file herunterladen
-
-    geojson_data_install = requests.get(geo_data)
-    with open('geojson_data.json', 'wb') as f:
-        f.write(geojson_data_install.content)
+    bundesländer = ['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 
+                    'Niedersachsen', 'Nordrhein-Westfalen', 
+                    'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen']
     
+    population = Bevölkerung.objects.filter(ort__in=bundesländer)
+    population_df = pd.DataFrame(list(population.values()))
 
-    population = Bevölkerung.objects.all()
-    bundesländer = ['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 'Niedersachsen', 'Nordrhein-Westfalen', 'Rheinland-Pfalz', 'Saarland', 'Sachsen', 'Sachsen-Anhalt', 'Schleswig-Holstein', 'Thüringen']
-    # Filtere die Daten für die Bundesländer
-    for i in population:
-        # Koordinaten für die Orte werden benötigt schauen, ob es im Bundesland liegt
-        from .views_helper import haversine
-        koordinaten = [i.latitude, i.longitude]
-        # jetzt soll unter den geojson_data_install die Koordinaten der Orte mit den Koordinaten der Bundesländer verglichen werden
-        for bundesland in bundesländer:
-            # Koordinaten der Bundesländer
-            bundesland_koordinaten = []
-            with open('geojson_data.json') as f:
-                data = json.load(f)
-                for feature in data['features']:
-                    if feature['properties']['name'] == bundesland:
-                        bundesland_koordinaten = feature['geometry']['coordinates']
-                        break
-            # Jetzt haben wir die Koordinaten der Bundesländer und die Koordinaten der Orte
-            # Jetzt schauen wir, ob die Koordinaten der Orte in den Koordinaten der Bundesländer liegen
-            if haversine(koordinaten, bundesland_koordinaten) == True:
-                print(i.ort, "liegt in", bundesland)
-                i.bundesland = bundesland
-                i.save()
-
-    # Population in Deutschland als pd.DataFrame
-    population_df = pd.DataFrame.from_records(population.values())
-    m = folium.Map(width='100%',height='70%',location=[51.165707, 10.452764], zoom_start=5, name="Inserate")
-    # Lade die GeoJson Datei für die Bundesländer
+    # Karte von Folium mit der Bevölkerungsdichte in Deutschland mit unseren Daten
+    m = folium.Map(width='100%',height='70%',location=[51.165707, 10.452764], zoom_start=6, name="Choropleth Map")
     folium.Choropleth(
-        geo_data='https://raw.githubusercontent.com/isellsoap/deutschlandGeoJSON/master/2_bundeslaender/4_niedrig.geo.json',
+        geo_data='https://raw.githubusercontent.com/isellsoap/deutschlandGeoJSON/master/2_bundeslaender/4_niedrig.geo.json',   # Lade die GeoJson Datei für die Bundesländer
         name='choropleth',
         data=population_df,
         # Spalte mit der Bevölkerungsdichte und den Koordinaten der Orte
@@ -237,7 +210,10 @@ def bevölkerungsheatmap(request):
         key_on='feature.properties.name',
         fill_opacity=0.7,
         line_opacity=0.2,
-        legend_name='Bevölkerungsdichte'
+        fill_color="YlGn",
+        legend_name='Bevölkerungsdichte in Deutschland'
     ).add_to(m)
+    folium.LayerControl(collapsed=False).add_to(m)
+
     context = {'map': m._repr_html_(), 'title': 'Karte'}
     return render(request, 'bevölkerungsheatmap.html', context)
