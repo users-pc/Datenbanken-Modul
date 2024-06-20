@@ -1,0 +1,19 @@
+Dokumentation/Herangehensweise
+1. Einrichtung von PostgreSQL und Django
+Problem: Die Installation und Konfiguration von PostgreSQL kann am Anfang verwirrend sein. Wir haben einen Remote-Server genommen und ein Postgresql erstellt, damit wir als Team zusammenarbeiten können. Wie ?  
+Lösung: Wir haben uns in der Dokumentation umgesehen, Tutorials angeschaut und uns gegenseitig unterstützt.
+2. Datenbanktabellen erstellen
+Problem: Wie erstellen wir überhaupt Tabellen? Welche Felder sollten wir verwenden? Wie definieren wir Beziehungen zwischen den Tabellen?
+Lösung: Wir haben uns mit dem Django ORM vertraut gemacht und unsere Modelle definiert. Dabei lernen wir, wie wir Primärschlüssel, Fremdschlüssel und Embedded SQL verwenden. Dazu gehört auch der Vorgang der Datenbereinigung.
+3. Daten importieren und geografische Koordinaten hinzufügen
+Problem: Wir haben CSV-Dateien mit Hochschuldaten und Bevölkerungszahlen. Wie importieren wir diese in unsere Datenbank? Und wie fügen wir den Hochschulen geografische Koordinaten hinzu?
+Lösung: Wir haben Python-Skripte geschrieben, um die Daten zu importieren und Nominatim zu verwenden, um Adressen in Koordinaten umzuwandeln (Breiten- und Längengrade).
+4. Entwicklung der Website
+Problem: Wie gestalten wir eine benutzerfreundliche Website? Welche Technologien verwenden wir? Wie verknüpfen wir Frontend und Backend?
+Lösung: Wir setzen auf Bootstrap für das Design, JavaScript für die Interaktivität und Django für die Logik.Dabei bietet Django eine gute Umgebung.
+5. Datenvisualisierung
+Problem: Wie präsentieren wir die Daten auf unserer Website? Welche Diagramme und Karten sind am besten geeignet?
+Lösung: Wir haben uns mit Folium für Karten, Plotly für Diagramme und anderen Tools vertraut gemacht. Dabei haben wir gelernt, wie man Daten sinnvoll und gut Darstellen kann.
+6. Weitere Schritte
+Problem: Wie können wir fehlende Daten hinzufügen und bessere Visualisierungen machen? 
+Lösung: Wir haben das Internet durchforstet und viele Opendata Quellen gefunden, wie Nominatim und Geofabrik zur Aufwertung unserer Daten. 
