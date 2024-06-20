@@ -38,7 +38,7 @@ Unsere interaktive Visualisierungswebsite soll nicht nur Antworten liefern, sond
   - Koordinaten
   - Optional: Website
 
-### Heatmap
+### Flächenkartogramm
 - **bevölkerung.csv**:
   - Anzahl
   - Insgesamt
