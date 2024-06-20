@@ -56,5 +56,52 @@ Die Daten können auf der Website unter [Link zur Website] eingesehen werden.
 
 
 ## Aufgabe 4: Weitere Schritte
-[Hier weitere Schritte einfügen]
+
+#1.
+Abfrage: 
+SQL: “
+SELECT
+    trägerschaft,
+    SUM(anz_studis) AS Anzahl_Studierende
+FROM Hochschulen
+GROUP BY trägerschaft;
+“ Diese Abfrage summiert die Anzahl der Studierenden für jede Trägerschaft (öffentlich oder privat).
+
+
+#2.
+Abfrage: 
+SQL:”SELECT DISTINCT typ FROM Hochschulen;” ->  Gibt alle Hochschul Kategorien aus
+
+Abfrage:
+“SELECT bundesland, SUM(anz_studis) AS Anzahl_Studierende
+FROM Hochschulen
+GROUP BY bundesland;” -> Gruppiert nach Bundesländern und zählt die Anzahl der Studierenden 
+
+
+
+
+
+#3.
+Abfrage:
+SQL : “SELECT
+    h.bundesland,
+    SUM(h.anz_studis) AS Anzahl_Studierende,
+    b.total_population AS Bevölkerung
+FROM Hochschulen h
+JOIN Bevölkerung b ON h.bundesland = b.ort 
+GROUP BY h.bundesland, b.total_population;” -> Verknüpfung der Bundesland Bevölkerungsdichte und Hochschulen mit der Anzahl der Studierenden  in diesem Bundesland. 
+
+
+#4.
+Abfrage: 
+SQL: “SELECT
+    'Male' AS Geschlecht,
+    SUM(male_population) AS Anzahl_Männlich,
+    'Female' AS Geschlecht,
+    SUM(female_population) AS Anzahl_Weiblich,
+    'Total' AS Geschlecht,
+    SUM(total_population) AS Gesamtbevölkerung
+FROM Bevölkerung;”  
+-> Gibt die Gesamtbevölkerung von Deuschland aus nach Geschlecht und der Gesamtbevölkerung 
+
 
