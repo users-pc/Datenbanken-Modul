@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .views_helper import coordinates, hopenclosed, uni_vs_fachhochschule,  studis_an_uni_vs_fachhochschule, studis_bundesland
+from .views_helper import coordinates, hopenclosed, uni_vs_fachhochschule,  studis_an_uni_vs_fachhochschule, studis_bundesland, verhältnis_geschlechter
 import csv
 from .models import Hochschulen, Bevölkerung
 from django.core.paginator import Paginator
@@ -9,7 +9,8 @@ import folium
 import pandas as pd
 
 from folium.plugins import MarkerCluster
-# Create your views here.
+
+
 def home(request):
     # einfügen der csv
     return render(request, 'index.html')
@@ -161,6 +162,11 @@ def hochschulenvisual(request):
     context = {'hopenclosed': hopenclosed_plotly,'uni_vs_fachhochschule': uni_vs_fachhochschule_plotly, 'studis_an_uni_vs_fachhochschule': studis_an_uni_vs_fachhochschule_plotly,'title': 'Visualisierung', 'studis_bundesland': studis_bundesland_plotly}
     return render(request, 'hochschulenvisual.html', context)
 
+def bevölkerungvisual(request):
+    bevölkerung = Bevölkerung.objects.all()
+    verhältnis_geschlechter_plotly=verhältnis_geschlechter(bevölkerung)
+    context = {'verhältnis_geschlechter': verhältnis_geschlechter_plotly, 'title': 'Visualisierung'}
+    return render(request, 'bevölkerung_visual.html', context)
 
 
 
@@ -189,7 +195,6 @@ def hochschulenmap(request):
 
 
 def bevölkerungsmap(request):
-    # Mache eine choropleth map mit der Bevölkerungsdichte in Deutschland mit Folium 
     # Die Daten für die Bevölkerungsdichte sind in der Bevölkerungstabelle gespeichert
     # geojson importieren und file herunterladen
     bundesländer = ['Baden-Württemberg', 'Bayern', 'Berlin', 'Brandenburg', 'Bremen', 'Hamburg', 'Hessen', 'Mecklenburg-Vorpommern', 
@@ -217,3 +222,4 @@ def bevölkerungsmap(request):
 
     context = {'map': m._repr_html_(), 'title': 'Karte'}
     return render(request, 'bevölkerungsheatmap.html', context)
+

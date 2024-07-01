@@ -173,3 +173,22 @@ def studis_bundesland(objects):
     fig = go.Figure(data=[go.Bar(x=bundesland, y=studis)])
     plot = opy.plot(fig, auto_open=False, output_type='div')
     return plot
+
+
+
+def verhältnis_geschlechter(objects):
+    bevölkerung = objects
+    männlich = 0
+    weiblich = 0
+    # datenbereinigung und Summierung
+    for population in bevölkerung:
+        if population.male_population is not None:
+            männlich += population.male_population
+        if population.female_population is not None:
+            weiblich += population.female_population
+    labels = ['Männlich', 'Weiblich']
+    values = [männlich, weiblich]
+    fig = go.Figure(data=[go.Pie(labels=labels, values=values)])
+    plot = opy.plot(fig, auto_open=False, output_type='div')
+
+    return plot

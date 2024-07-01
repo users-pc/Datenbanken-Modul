@@ -8,6 +8,7 @@ urlpatterns = [
     #------------ Visualisierung durch Diagramme etc. ------------------
     path('visual', views.visual, name="visual"),
     path('hochschulenvisual', views.hochschulenvisual, name="hochschulenvisual"),
+    path('beölkerungvisual', views.bevölkerungvisual, name="bevölkerungvisual"),
     # ------------ Karte ------------------
     path('karten', views.karten, name="karten"),
     path('hochschulkarte', views.hochschulenmap, name="hochschulkarte"),
