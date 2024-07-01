@@ -175,7 +175,7 @@ def hochschulenmap(request):
     m = folium.Map(width='100%',height='70%',location=[51.165707, 10.452764], zoom_start=5, name="Inserate")    
     map_cluster = MarkerCluster().add_to(m)
     for hochschule in Hochschulen.objects.all():
-        html = f'<a href="{hochschule.homepage}"> {hochschule.name} </a>'
+        html = f'<a target="_blank" href="{hochschule.homepage}"> {hochschule.name} </a>'
         folium.Marker(
             location=[hochschule.latitude, hochschule.longitude],
             popup=html, # Im Popup kann ein a href zu der homepage der Hochschule eingefügt werden
